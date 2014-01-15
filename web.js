@@ -27,7 +27,7 @@ var test;
 
 mc.set('hello', 'bob');
 
-mc.set('hello', function(val) {
+mc.get('hello', function(val) {
     console.log("winning!~",val);
 	test = val;
 });
