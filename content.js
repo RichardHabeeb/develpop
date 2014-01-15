@@ -20,7 +20,30 @@ var mc 			= memjs.Client.create()
 
 exports.root 			= function(req, res) { 
 
-	res.sendfile("index.html", res); 
+drink_dic = {};
+var i = 0;
+
+var callback = function(err, value, key){
+	if( value != null ){
+		console.log(drinkKeys[i], " has ", value.toString(), " votes");
+		drink_dic[drinkKeys[i]] = key;
+	}
+	else{
+		drink_dic[drinkKeys[i]] = 0;
+	}
+	i++;
+	if( i < drinkKeys.length){
+		mc.get(drinkKeys[i], callback);
+	}
+}
+
+mc.get(drinkKeys[i], callback);
+
+res.cookie("drinks", JSON.stringify(drink_dic));
+
+res.sendfile("index.html", res); 
+
+
 };
 
 exports.stylesheet 		= function(req, res) { res.sendfile('css/' + req.params.style); };
