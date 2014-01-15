@@ -23,6 +23,12 @@ var mc 			= memjs.Client.create()
 app.use(express.logger());
 
 
+var test;
+mc.get('hello', function(val) {
+    console.log("winning!~",val);
+	test = val;
+});
+
 
 
 
@@ -42,7 +48,7 @@ app.get('/images/:image', content.image);
 //CONTENT
 app.get('/content/:page', content.page);
 
-app.get('/lol/', function(req, res) {  res.send("winning "+ val.toString())});
+app.get('/lol/', function(req, res) {  res.send("winning "+ test.toString())});
 
 app.listen(port, function() {
 	console.log("Listening on " + port);
