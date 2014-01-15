@@ -24,10 +24,14 @@ var mc 			= memjs.Client.create()
 app.use(express.logger());
 
 
-
+var test;
 mc.get('hello', function(val) {
     console.log("winning!~",val);
-})
+	test = val;
+});
+
+
+
 
 
 //------------------------------------------------ ROUTES
@@ -41,10 +45,11 @@ app.get('/js/:script', content.script);
 
 //IMAGES
 app.get('/images/:image', content.image);
-app.get('/images/:year/:image', content.eventImage);
 
 //CONTENT
 app.get('/content/:page', content.page);
+
+app.get('/lol/', function(req, res) {  res.send("winning "+ val.toString())});
 
 app.listen(port, function() {
 	console.log("Listening on " + port);
