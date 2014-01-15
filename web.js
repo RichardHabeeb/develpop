@@ -23,12 +23,6 @@ var mc 			= memjs.Client.create()
 app.use(express.logger());
 
 
-var test;
-mc.get('hello', function(val) {
-    console.log("winning!~",val);
-	test = val;
-});
-
 
 
 
