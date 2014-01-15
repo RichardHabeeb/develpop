@@ -5,14 +5,16 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="css/theme.css" rel="stylesheet" media="screen">
 		<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
-		<title>Title</title>
+		
+		
+		<title>Develpop</title>
 	</head>
 
 	<body>
 
 		<div class="jumbotron">
-		<h1><a href="#" onclick="loadPageIntoContent('content/index.html');">Drink System</a></h1>
-			<p class="lead">Subtitle. <a href='#'>Join us</a>.</p>
+		<h1><a href="" onclick="loadPageIntoContent('content/index.html');">Develpop</a></h1>
+			<p class="lead"><a href='#'></a></p>
 		</div>
 
 		<div class="container">
@@ -33,6 +35,31 @@
 
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script>
+		
+		
+			function loadPageIntoContent( url ) 
+			{	
+				url = (!(/^[A-Za-z0-9\.\/]*$/.test(url))) ? "content/index.html" : url.replace(/\/+/g, "/");
+				
+				$.ajax( url ).done( function( data ) 
+				{
+					$(".content").html( data );
+				});
+			}
+			
+			$(document).ready(function () 
+			{
+				if( window.location.hash && window.location.hash.length > 1)
+				{
+					loadPageIntoContent(window.location.hash.substring(1));
+				}
+				else
+					loadPageIntoContent("content/index.html");
+				
+			});
+		</script>
+
 	</body>
 
 </html>

@@ -12,13 +12,16 @@ var express 	= require("express");
 var content		= require("./content.js");
 
 
+
+
 //------------------------------------------------ GLOBALS
 var app 		= express();
 var port 		= process.env.PORT || 80;
 
-
+  
 //------------------------------------------------ CONFIG
 app.use(express.logger());
+
 
 
 //------------------------------------------------ ROUTES
@@ -36,9 +39,6 @@ app.get('/images/:year/:image', content.eventImage);
 
 //CONTENT
 app.get('/content/:page', content.page);
-
-
-
 
 app.listen(port, function() {
 	console.log("Listening on " + port);

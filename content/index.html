@@ -1,0 +1,29 @@
+<div id='wordcloud'>
+	
+</div>
+
+<script>
+	$(document).ready(function () 
+	{
+		drinks = {"Coke": 1, "DP": 3, "Dew" :7 };
+		
+		largestVal = -1;
+		smallestVal = Number.MAX_VALUE;
+		
+		for(key in drinks)
+		{
+			largestVal = ( drinks[key] > largestVal ) ? drinks[key] : largestVal;
+			smallestVal = ( drinks[key] < smallestVal ) ? drinks[key] : smallestVal;
+		}	
+		
+		for( key in drinks )
+		{
+			
+		}
+		
+		$("#wordcloud.a").click(function() {
+		
+		
+		});
+	});
+</script>
