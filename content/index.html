@@ -5,10 +5,14 @@
 <script>
 	$(document).ready(function () 
 	{
-		drinks = {"Coke": 1, "DP": 3, "Dew" :7 };
-		
+		fontColors = ["#800000", "#333300", "#333399" ];
+		drinks = {"Coke": 25, "Dr. Pepper": 3, "Dew" :7, "Root Beer" : 13 };
+		fontSizes = {};
 		largestVal = -1;
 		smallestVal = Number.MAX_VALUE;
+		
+		maxFontSize = 50;
+		minFontSize = 20;
 		
 		for(key in drinks)
 		{
@@ -16,10 +20,15 @@
 			smallestVal = ( drinks[key] < smallestVal ) ? drinks[key] : smallestVal;
 		}	
 		
+		htmlString = ""
 		for( key in drinks )
 		{
-			
+			htmlString += "<a href='#' style='color:"+fontColors[Math.floor(Math.random()*fontColors.length)]+";font-size:"+(((maxFontSize-minFontSize)*(drinks[key]-smallestVal)/(largestVal-smallestVal))+minFontSize)+"px'>" + key + "</a>"
 		}
+		$("#wordcloud").html(htmlString);
+		
+		
+		console.log(fontSizes);
 		
 		$("#wordcloud.a").click(function() {
 		

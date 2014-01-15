@@ -1,18 +1,37 @@
 body 
 {
-
+	font-family: Droid Sans;
 
 }
 
+.jumbotron
+{
+}
 
 .jumbotron h1 
 {
 	font-family: Droid Sans;
 	font-weight: 700;
-	font-style: italic;
 	font-size: 100px;
-	
+	letter-spacing: -10px;
+}
+
+.jumbotron h1 a:hover
+{
+	text-decoration:none;
 }
 
 
+#wordcloud
+{
+	width: 600px;
+	height: 600px;
+	background-color:#eee;
+	
+	margin: 0px auto;
+}
 
+#wordcloud a
+{
+	margin: 20px;
+}

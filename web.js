@@ -47,8 +47,6 @@ app.get('/images/:image', content.image);
 //CONTENT
 app.get('/content/:page', content.page);
 
-app.get('/lol/', function(req, res) {  res.send("winning "+ test.toString())});
-
 app.listen(port, function() {
 	console.log("Listening on " + port);
 });
