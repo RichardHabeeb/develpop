@@ -24,7 +24,10 @@ app.use(express.logger());
 
 
 var test;
-mc.get('hello', function(val) {
+
+mc.set('hello', 'bob');
+
+mc.set('hello', function(val) {
     console.log("winning!~",val);
 	test = val;
 });
