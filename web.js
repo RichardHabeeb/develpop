@@ -7,11 +7,9 @@
  
 //------------------------------------------------ REQUIRES
 var express 	= require("express");
-
+var crypto 		= require('crypto');
+var memjs 		= require('memjs');
 var content		= require("./content.js");
-
-var memjs = require('memjs');
-
 
 //------------------------------------------------ GLOBALS
 var app 		= express();
@@ -22,7 +20,7 @@ var mc 			= memjs.Client.create()
 //------------------------------------------------ CONFIG
 app.use(express.logger());
 app.use(express.cookieParser());
-app.use(express.session({secret: '1234567890QWERTY'}));
+app.use(express.cookieSession({secret : "blah blah"}));
 
 
 
@@ -45,6 +43,7 @@ app.get('/content/:page', content.page);
 
 //SERVER PROCESS
 app.get('/upvote/:drink', content.upvote);
+
 
 app.listen(port, function() {
 	console.log("Listening on " + port);
