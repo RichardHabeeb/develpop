@@ -5,7 +5,7 @@
 <script>
 	$(document).ready(function () 
 	{
-		fontColors = ["#800000", "#333300", "#333399" ];
+		fontColors = ["#800000", "#333300", "#333399"];
 		drinks = {"Coke": 25, "Dr. Pepper": 3, "Dew" :7, "Root Beer" : 13 };
 		fontSizes = {};
 		largestVal = -1;
@@ -28,11 +28,12 @@
 		$("#wordcloud").html(htmlString);
 		
 		
+		
 		console.log(fontSizes);
 		
-		$("#wordcloud.a").click(function() {
-		
-		
+		$("#wordcloud a").click(function() {
+			console.log($.ajax("/upvote/"+$(this).html()));
+			
 		});
 	});
 </script>

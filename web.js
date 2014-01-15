@@ -21,12 +21,8 @@ var mc 			= memjs.Client.create()
 
 //------------------------------------------------ CONFIG
 app.use(express.logger());
-
-
-
-mc.get("hello", function(err, value, key) {
-	console.log("-->mc.get:: ", err, value.toString(), key.toString());
-});
+app.use(express.cookieParser());
+app.use(express.session({secret: '1234567890QWERTY'}));
 
 
 
@@ -46,6 +42,9 @@ app.get('/images/:image', content.image);
 
 //CONTENT
 app.get('/content/:page', content.page);
+
+//SERVER PROCESS
+app.get('/upvote/:drink', content.upvote);
 
 app.listen(port, function() {
 	console.log("Listening on " + port);
