@@ -5,8 +5,7 @@
  *
  *************************************************/
  
- 
- //------------------------------------------------ REQUIRES
+//------------------------------------------------ REQUIRES
 var express 	= require("express");
 
 var content		= require("./content.js");
@@ -14,13 +13,13 @@ var content		= require("./content.js");
 var memjs = require('memjs');
 
 
- //------------------------------------------------ GLOBALS
+//------------------------------------------------ GLOBALS
 var app 		= express();
 var port 		= process.env.PORT || 80;
 var mc 			= memjs.Client.create()
 
 
- //------------------------------------------------ CONFIG
+//------------------------------------------------ CONFIG
 app.use(express.logger());
 
 
