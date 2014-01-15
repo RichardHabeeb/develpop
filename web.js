@@ -23,13 +23,9 @@ var mc 			= memjs.Client.create()
 app.use(express.logger());
 
 
-var test;
 
-mc.set('hello', 'bob');
-
-mc.get('hello', function(val) {
-    console.log("winning!~",val);
-	test = val;
+mc.get("hello", function(err, value, key) {
+	console.log("-->mc.get:: ", err, value.toString(), key.toString());
 });
 
 
