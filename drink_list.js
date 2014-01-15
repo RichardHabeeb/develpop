@@ -3,5 +3,12 @@ exports.drinkKeys = [
 "Coke",
 "Mr. Pibb",
 "Sprite",
+"Dew",
+"Game Fuel",
+"Red Gatorade",
+"Blue Gatorade",
+"Yellow Gatorade",
+"Orange Gatorade",
+"Root Beer"
 
 ]
