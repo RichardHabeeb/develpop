@@ -1,11 +1,13 @@
 body 
 {
 	font-family: Droid Sans;
-
+	background-color: #111;
 }
 
 .jumbotron
 {
+	background-color: #222;
+	color: #FFE081;
 }
 
 .jumbotron h1 
@@ -16,22 +18,50 @@ body
 	letter-spacing: -10px;
 }
 
+.jumbotron h1 a
+{
+	color: #F78701;
+}
+
 .jumbotron h1 a:hover
 {
 	text-decoration:none;
+	color: #FEC12B;
 }
 
 
 #wordcloud
 {
-	width: 600px;
-	height: 600px;
-	background-color:#eee;
-	
+	width: 800px;
+	height: 700px;
+	overflow:none;
 	margin: 0px auto;
 }
 
-#wordcloud a
+#wordcloud div 
 {
-	margin: 20px;
+	margin: 10px;
+	float:left;
+}
+
+#wordcloud div a
+{
+
+	white-space:nowrap;
+}
+
+.featurette-divider
+{
+border-color:#222;
+}
+
+
+a
+{
+	color: #F78701;
+}
+
+a:hover
+{
+	color: #FEC12B;
 }

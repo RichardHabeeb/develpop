@@ -5,13 +5,20 @@
  *
  *************************************************/
  
+ //+ Jonas Raoni Soares Silva
+//@ http://jsfromhell.com/array/shuffle [v1.0]
+function shuffle(o){ //v1.0
+	for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+	return o;
+};
+
  
 //------------------------------------------------ REQUIRES
 var fs  		= require("fs");
+var crypto 		= require('crypto');
 var drinkKeys	= require("./drink_list.js").drinkKeys;
+var memjs 		= require('memjs');
 
-
-var memjs = require('memjs');
 
 var mc 			= memjs.Client.create()
 
@@ -19,33 +26,31 @@ var mc 			= memjs.Client.create()
 //------------------------------------------------ ROUTES
 
 exports.root 			= function(req, res) { 
+							drink_dic = {};
+							var i = 0;
+							drinkKeys = shuffle(drinkKeys);
+							var callback = function(err, value, key) {
+								if( value != null ){
+									console.log(drinkKeys[i], " has ", value.toString(), " votes");
+									drink_dic[drinkKeys[i]] = +value.toString();
+								}
+								else {
+									mc.increment( drinkKeys[i], 1, function(err, success) {
+										drink_dic[drinkKeys[i]] = 0;
+									});
+								}
+								i++;
+								if( i < drinkKeys.length) {
+									mc.get(drinkKeys[i], callback);
+								}
+								else {
+									res.cookie("drinks", JSON.stringify(drink_dic));
+									res.sendfile("index.html", res); 
+								}
+							}
 
-drink_dic = {};
-var i = 0;
-
-var callback = function(err, value, key){
-	if( value != null ){
-		console.log(drinkKeys[i], " has ", value.toString(), " votes");
-		drink_dic[drinkKeys[i]] = key;
-	}
-	else{
-		drink_dic[drinkKeys[i]] = 0;
-	}
-	i++;
-	if( i < drinkKeys.length){
-		mc.get(drinkKeys[i], callback);
-	}
-}
-
-mc.get(drinkKeys[i], callback);
-
-res.cookie("drinks", JSON.stringify(drink_dic));
-
-res.sendfile("index.html", res); 
-
-
-};
-
+							mc.get(drinkKeys[i], callback);
+						};
 exports.stylesheet 		= function(req, res) { res.sendfile('css/' + req.params.style); };
 exports.script	 		= function(req, res) { res.sendfile('js/' + req.params.script); };
 exports.image	 		= function(req, res) { res.sendfile('images/' + req.params.image); };
@@ -62,6 +67,7 @@ exports.upvote			= function(req, res) {
 									mc.increment( req.params.drink, 1, function(err, success) {
 										req.session.voted = new Date();
 										console.log("upvote1: ", req.params.drink, hash );
+										res.send("true");
 									});
 								});
 							}
@@ -72,12 +78,18 @@ exports.upvote			= function(req, res) {
 										mc.increment( req.params.drink, 1, function(err, success) {
 											req.session.voted = new Date();
 											console.log("upvote2: ", req.params.drink, req.cookies.sess);
+											res.send("true");
 										});
+									}
+									else
+									{
+										console.log("failed to upvote:", req.params.drink, req.session.voted);
+										res.send("false");
 									}
 								});
 							}
-							console.log("attempting to upvote:", req.params.drink, req.session.voted);
-							res.send("");
+							
+							
 						};
 
 						

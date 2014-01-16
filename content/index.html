@@ -3,16 +3,33 @@
 </div>
 
 <script>
-	$(document).ready(function () 
+	var drinks = [];
+	
+	function getCookie(cname)
 	{
-		fontColors = ["#800000", "#333300", "#333399"];
-		drinks = {"Coke": 25, "Dr. Pepper": 3, "Dew" :7, "Root Beer" : 13 };
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++) 
+	  {
+	  var c = ca[i].trim();
+	  if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+	}
+	return "";
+	}
+	
+	function updateWordCloud()
+	{
+		fontColors = ["#F78701", "#FEC12B", "#FFE081", "#BFD358", "#67A14A"];
+		
+		
+		
+		//drinks = {"Coke": 25, "Dr. Pepper": 3, "Dew" :7, "Root Beer" : 13 };
 		fontSizes = {};
 		largestVal = -1;
 		smallestVal = Number.MAX_VALUE;
 		
-		maxFontSize = 50;
-		minFontSize = 20;
+		maxFontSize = 70;
+		minFontSize = 30;
 		
 		for(key in drinks)
 		{
@@ -23,17 +40,29 @@
 		htmlString = ""
 		for( key in drinks )
 		{
-			htmlString += "<a href='#' style='color:"+fontColors[Math.floor(Math.random()*fontColors.length)]+";font-size:"+(((maxFontSize-minFontSize)*(drinks[key]-smallestVal)/(largestVal-smallestVal))+minFontSize)+"px'>" + key + "</a>"
+			htmlString += "<div><a href='#' style='color:"+fontColors[Math.floor(Math.random()*fontColors.length)]+";font-size:"+(((maxFontSize-minFontSize)*(drinks[key]-smallestVal)/(largestVal-smallestVal))+minFontSize)+"px'>" + key + "</a></div>"
 		}
 		$("#wordcloud").html(htmlString);
 		
-		
-		
-		console.log(fontSizes);
-		
 		$("#wordcloud a").click(function() {
-			console.log($.ajax("/upvote/"+$(this).html()));
-			
+			var drinkName = $(this).html();
+			$.ajax("/upvote/"+drinkName).done(function( data ) {
+				console.log(data);
+				if (data == "true")
+				{
+					drinks[drinkName] += 1;
+					updateWordCloud();
+				}
+			});
+
 		});
+	}
+
+	$(document).ready(function () 
+	{
+		drinks = JSON.parse(decodeURIComponent(getCookie("drinks")), "hai!");
+		updateWordCloud();
+		
+
 	});
 </script>
