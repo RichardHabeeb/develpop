@@ -9,6 +9,7 @@ exports.drinkKeys = [
 "Blue Gatorade",
 "Yellow Gatorade",
 "Orange Gatorade",
-"Root Beer"
-
+"Root Beer",
+"Fresca",
+"Squirt",
 ]

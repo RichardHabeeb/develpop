@@ -2,8 +2,10 @@
 	
 </div>
 
+
 <script>
 	var drinks = [];
+	var voted = false;
 	
 	function getCookie(cname)
 	{
@@ -19,8 +21,7 @@
 	
 	function updateWordCloud()
 	{
-		fontColors = ["#F78701", "#FEC12B", "#FFE081", "#BFD358", "#67A14A"];
-		
+		fontColors = voted ? ["#333"] : ["#F78701", "#FEC12B", "#FFE081", "#BFD358", "#67A14A"];
 		
 		
 		//drinks = {"Coke": 25, "Dr. Pepper": 3, "Dew" :7, "Root Beer" : 13 };
@@ -47,12 +48,13 @@
 		$("#wordcloud a").click(function() {
 			var drinkName = $(this).html();
 			$.ajax("/upvote/"+drinkName).done(function( data ) {
-				console.log(data);
+				voted = true;
+				updateWordCloud();
 				if (data == "true")
 				{
 					drinks[drinkName] += 1;
-					updateWordCloud();
 				}
+				
 			});
 
 		});
