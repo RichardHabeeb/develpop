@@ -17,7 +17,7 @@ var port 		= process.env.PORT || 80;
 //------------------------------------------------ CONFIG
 app.use(express.logger());
 app.use(express.cookieParser());
-app.use(express.cookieSession({secret : "blah blah"}));
+app.use(express.cookieSession({secret : "blah blah", maxAge  : new Date(Date.now() + 3600000)}));
 
 
 
